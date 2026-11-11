@@ -1,114 +1,91 @@
 
-// ===============================
-// EDUSPACE - JAVASCRIPT
-// ===============================
+// Récupérer les données enregistrées
+function getData(type) {
+    return JSON.parse(localStorage.getItem(type)) || [];
+}
 
-// Afficher la date actuelle
-const today = document.getElementById("today");
+// Enregistrer les données
+function saveData(type, data) {
+    localStorage.setItem(type, JSON.stringify(data));
+}
 
-if (today) {
-    today.textContent = new Date().toLocaleDateString("fr-FR", {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric"
+// Afficher les données
+function displayData(type) {
+    const list = document.getElementById(type + "List");
+
+    if (!list) return;
+
+    const data = getData(type);
+    list.replaceChildren();
+
+    data.forEach(function(item) {
+        const li = document.createElement("li");
+
+        li.textContent = Object.values(item).join(" - ");
+
+        list.appendChild(li);
     });
 }
 
-// Afficher l'année
-const year = document.getElementById("year");
+// Gérer les formulaires
+document.querySelectorAll("[data-form]").forEach(function(form) {
 
-if (year) {
-    year.textContent = new Date().getFullYear();
-}
+    const type = form.dataset.form;
+    const message = form.querySelector(".message");
 
-// ===============================
-// DARK MODE
-// ===============================
+    form.addEventListener("submit", function(event) {
 
-const themeToggle = document.getElementById("themeToggle");
+        event.preventDefault();
 
-if (themeToggle) {
-    // Restaurer le thème sauvegardé
-    const savedTheme = localStorage.getItem("eduTheme");
+        // Récupérer les informations
+        const formData = new FormData(form);
+        const newItem = Object.fromEntries(formData.entries());
 
-    if (savedTheme === "dark") {
-        document.body.classList.add("dark");
-        themeToggle.textContent = "☀";
-    }
+        // Vérifier les champs
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
 
-    themeToggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark");
+        const data = getData(type);
 
-        const isDark = document.body.classList.contains("dark");
+        // Vérifier les identifiants des moniteurs
+        if (type === "moniteurs") {
+            const existe = data.some(function(item) {
+                return item.identifiant === newItem.identifiant;
+            });
 
-        themeToggle.textContent = isDark ? "☀" : "☾";
+            if (existe) {
+                message.textContent =
+                    "Cet identifiant existe déjà !";
+                message.style.color = "red";
+                return;
+            }
+        }
 
-        localStorage.setItem(
-            "eduTheme",
-            isDark ? "dark" : "light"
-        );
+        // Ajouter les données
+        data.push(newItem);
+
+        // Sauvegarder
+        saveData(type, data);
+
+        // Afficher le résultat
+        displayData(type);
+
+        message.textContent = "Ajout effectué avec succès !";
+        message.style.color = "green";
+
+        // Vider le formulaire
+        form.reset();
     });
-}
 
-// ===============================
-// MOBILE MENU
-// ===============================
-
-const menuToggle = document.getElementById("menuToggle");
-const sidebar = document.getElementById("sidebar");
-
-if (menuToggle && sidebar) {
-    menuToggle.addEventListener("click", () => {
-        sidebar.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (event) => {
-        if (
-            window.innerWidth <= 700 &&
-            !sidebar.contains(event.target) &&
-            !menuToggle.contains(event.target)
-        ) {
-            sidebar.classList.remove("show");
+    // Effacer le message lors de l'annulation
+    form.addEventListener("reset", function() {
+        if (message) {
+            message.textContent = "";
         }
     });
-}
 
-// ===============================
-// STATISTICS
-// ===============================
-
-function updateStatistics() {
-
-    const moniteurs = JSON.parse(
-        localStorage.getItem("moniteurs") || "[]"
-    );
-
-    const apprenants = JSON.parse(
-        localStorage.getItem("apprenants") || "[]"
-    );
-
-    const seances = JSON.parse(
-        localStorage.getItem("seances") || "[]"
-    );
-
-    const moniteurCount = document.getElementById("moniteurCount");
-    const apprenantCount = document.getElementById("apprenantCount");
-    const seanceCount = document.getElementById("seanceCount");
-
-    if (moniteurCount) {
-        moniteurCount.textContent = moniteurs.length;
-    }
-
-    if (apprenantCount) {
-        apprenantCount.textContent = apprenants.length;
-    }
-
-    if (seanceCount) {
-        seanceCount.textContent = seances.length;
-    }
-}
-
-updateStatistics();
-
-console.log("EduSpace est prêt !");
+    // Afficher les anciennes données
+    displayData(type);
+});
