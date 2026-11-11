@@ -1,20 +1,31 @@
 
-# Projet 1
 
-This is a description
+# Ensemble, vivons la route
 
-## Section 1
+## Description
+Application web de gestion d'une auto-école.
 
-This is another description
+## Technologies utilisées
+- HTML5
+- CSS3
+- JavaScript
 
-### Technologies used
+## Fonctionnalités
+- Gestion des moniteurs
+- Gestion des apprenants
+- Gestion des séances
+- Validation des formulaires
+- Sauvegarde avec LocalStorage
+- Animation du feu tricolore
 
-- HTML
-- CSS
-
-**Important**
-
-### Files
-
+## Structure du projet
 - index.html
+- pages/
+- assets/css/
+- assets/js/
+- assets/images/
+
+## Auteur
+Eya
+
 - [GitHub Link](https://github.com)

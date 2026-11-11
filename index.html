@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ensemble, vivons la route</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="home">
+
+    <!-- Zone 1 : En-tête -->
+    <header class="header">
+        <h1>Ensemble, vivons la route</h1>
+
+        <div class="traffic-light">
+            <div class="light red"></div>
+            <div class="light orange"></div>
+            <div class="light green"></div>
+        </div>
+    </header>
+
+    <!-- Zone 2 : Menu -->
+    <nav class="navigation">
+        <h2>Menu de navigation</h2>
+
+        <ul>
+            <li><a href="pages/moniteur.html" target="content">Moniteur</a></li>
+            <li><a href="pages/apprenant.html" target="content">Apprenant</a></li>
+            <li><a href="pages/seances.html" target="content">Séances</a></li>
+        </ul>
+    </nav>
+
+    <!-- Zone 3 : Affichage -->
+    <main class="content">
+        <iframe name="content"
+                src="pages/seances.html"
+                title="Pages du projet">
+        </iframe>
+    </main>
+
+    <!-- Zone 4 : Pied de page -->
+    <footer class="footer">
+        <details>
+            <summary>Contact</summary>
+
+            <table>
+                <tr>
+                    <th colspan="2">Téléphone</th>
+                </tr>
+                <tr>
+                    <td>Fixe</td>
+                    <td>Mobile</td>
+                </tr>
+                <tr>
+                    <td>72 200 200</td>
+                    <td>20 200 200</td>
+                </tr>
+            </table>
+        </details>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

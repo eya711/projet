@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Apprenant</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<div class="form-container">
+    <form id="apprenantForm" data-form="apprenants">
+        <fieldset>
+            <legend>Apprenant</legend>
+
+            <div class="form-group">
+                <label for="nomApprenant">Nom & Prénom :</label>
+                <input type="text" id="nomApprenant" name="nom" required>
+            </div>
+
+            <div class="form-group">
+                <label>Genre :</label>
+                <label>
+                    <input type="radio" name="genre" value="Homme" required>
+                    Homme
+                </label>
+
+                <label>
+                    <input type="radio" name="genre" value="Femme">
+                    Femme
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label for="contact">Contact :</label>
+                <input type="tel" id="contact" name="contact"
+                       pattern="[0-9 +()-]{8,20}" required>
+            </div>
+
+            <button type="submit">Ajouter</button>
+            <button type="reset">Annuler</button>
+
+            <p class="message" aria-live="polite"></p>
+        </fieldset>
+    </form>
+</div>
+
+<div class="records">
+    <h3>Liste des apprenants</h3>
+    <ul id="apprenantsList"></ul>
+</div>
+
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

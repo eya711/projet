@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Séances</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<div class="form-container">
+    <form id="seanceForm" data-form="seances">
+        <fieldset>
+            <legend>Nouvelle Séance</legend>
+
+            <div class="form-group">
+                <label for="idMoniteurSeance">Identifiant Moniteur :</label>
+                <input type="text" id="idMoniteurSeance"
+                       name="idMoniteur" required>
+            </div>
+
+            <div class="form-group">
+                <label for="idApprenantSeance">Identifiant Apprenant :</label>
+                <input type="text" id="idApprenantSeance"
+                       name="idApprenant" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dateSeance">Date Séance :</label>
+                <input type="date" id="dateSeance" name="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="heureSeance">Heure Séance :</label>
+                <input type="time" id="heureSeance" name="heure" required>
+            </div>
+
+            <div class="form-group">
+                <label for="typeSeance">Type Séance :</label>
+                <select id="typeSeance" name="type" required>
+                    <option value="Code">Code</option>
+                    <option value="Conduite">Conduite</option>
+                </select>
+            </div>
+
+            <button type="submit">Ajouter</button>
+            <button type="reset">Annuler</button>
+
+            <p class="message" aria-live="polite"></p>
+        </fieldset>
+    </form>
+</div>
+
+<div class="records">
+    <h3>Liste des séances</h3>
+    <ul id="seancesList"></ul>
+</div>
+
+<script src="../assets/js/app.js"></script>
+</body>
+</html>
