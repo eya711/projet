@@ -240,3 +240,209 @@ body.home {
     gap: 5px;
     min-height: 95vh;
 }
+
+/* ===== CORRECTION RESPONSIVE ===== */
+
+/* Pages Moniteur, Apprenant et Séances */
+body:not(.home) {
+    display: block;
+    min-height: 100vh;
+    margin: 0;
+    padding: 16px;
+    background: #fff7fa;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+}
+
+fieldset {
+    min-width: 0;
+    border-radius: 10px;
+}
+
+.form-group label {
+    display: block;
+    width: auto;
+    margin-bottom: 8px;
+}
+
+.form-group input:not([type="radio"]),
+.form-group select {
+    width: 100%;
+    max-width: 100%;
+    min-height: 42px;
+}
+
+.form-group input[type="radio"] {
+    width: auto;
+}
+
+button {
+    border: none;
+    border-radius: 7px;
+    padding: 10px 18px;
+}
+
+.records {
+    width: 100%;
+    max-width: 700px;
+    margin: 20px auto;
+    overflow-wrap: anywhere;
+}
+
+.records li {
+    padding: 10px;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Page d'accueil */
+body.home {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+    grid-template-rows: auto minmax(500px, 1fr) auto;
+    min-height: 100vh;
+    margin: 0;
+    padding: 12px;
+    gap: 12px;
+}
+
+.header,
+.navigation,
+.content,
+.footer {
+    min-width: 0;
+}
+
+.content {
+    overflow: hidden;
+}
+
+.content iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+}
+
+/* Téléphones et petits écrans */
+@media (max-width: 650px) {
+
+    body.home {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto minmax(750px, auto) auto;
+        padding: 8px;
+        gap: 10px;
+    }
+
+    .header {
+        grid-column: 1;
+        min-height: 120px;
+        padding: 12px;
+        flex-direction: column;
+    }
+
+    .header h1 {
+        width: 100%;
+        margin: 0 0 12px;
+        padding: 12px;
+        font-size: 21px;
+    }
+
+    .header h1:hover {
+        width: 100%;
+    }
+
+    .traffic-light {
+        position: static;
+        flex-direction: row;
+        padding: 6px 10px;
+    }
+
+    .light {
+        width: 25px;
+        height: 25px;
+    }
+
+    .navigation {
+        grid-column: 1;
+        padding: 15px;
+    }
+
+    .navigation h2 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .navigation ul {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin: 12px 0 0;
+    }
+
+    .navigation li {
+        margin: 0;
+    }
+
+    .navigation a {
+        padding: 14px;
+        text-align: center;
+    }
+
+    .content {
+        grid-column: 1;
+        min-height: 750px;
+    }
+
+    .content iframe {
+        width: 100%;
+        height: 850px;
+        min-height: 850px;
+    }
+
+    .footer {
+        grid-column: 1;
+    }
+
+    body:not(.home) {
+        padding: 10px;
+    }
+
+    .form-container {
+        margin: 10px auto;
+        padding: 12px;
+    }
+
+    fieldset {
+        padding: 12px;
+    }
+
+    legend {
+        font-size: 18px;
+    }
+
+    .form-group {
+        margin: 18px 0;
+    }
+
+    .form-group label {
+        width: 100%;
+    }
+
+    .form-container button {
+        width: 100%;
+        margin: 6px 0;
+    }
+
+    .records {
+        margin: 15px auto;
+    }
+}
