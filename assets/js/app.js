@@ -1,91 +1,114 @@
 
-// Récupérer les données enregistrées
-function getData(type) {
-    return JSON.parse(localStorage.getItem(type)) || [];
-}
+// ===============================
+// EDUSPACE - JAVASCRIPT
+// ===============================
 
-// Enregistrer les données
-function saveData(type, data) {
-    localStorage.setItem(type, JSON.stringify(data));
-}
+// Afficher la date actuelle
+const today = document.getElementById("today");
 
-// Afficher les données
-function displayData(type) {
-    const list = document.getElementById(type + "List");
-
-    if (!list) return;
-
-    const data = getData(type);
-    list.replaceChildren();
-
-    data.forEach(function(item) {
-        const li = document.createElement("li");
-
-        li.textContent = Object.values(item).join(" - ");
-
-        list.appendChild(li);
+if (today) {
+    today.textContent = new Date().toLocaleDateString("fr-FR", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
     });
 }
 
-// Gérer les formulaires
-document.querySelectorAll("[data-form]").forEach(function(form) {
+// Afficher l'année
+const year = document.getElementById("year");
 
-    const type = form.dataset.form;
-    const message = form.querySelector(".message");
+if (year) {
+    year.textContent = new Date().getFullYear();
+}
 
-    form.addEventListener("submit", function(event) {
+// ===============================
+// DARK MODE
+// ===============================
 
-        event.preventDefault();
+const themeToggle = document.getElementById("themeToggle");
 
-        // Récupérer les informations
-        const formData = new FormData(form);
-        const newItem = Object.fromEntries(formData.entries());
+if (themeToggle) {
+    // Restaurer le thème sauvegardé
+    const savedTheme = localStorage.getItem("eduTheme");
 
-        // Vérifier les champs
-        if (!form.checkValidity()) {
-            form.reportValidity();
-            return;
-        }
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark");
+        themeToggle.textContent = "☀";
+    }
 
-        const data = getData(type);
+    themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark");
 
-        // Vérifier les identifiants des moniteurs
-        if (type === "moniteurs") {
-            const existe = data.some(function(item) {
-                return item.identifiant === newItem.identifiant;
-            });
+        const isDark = document.body.classList.contains("dark");
 
-            if (existe) {
-                message.textContent =
-                    "Cet identifiant existe déjà !";
-                message.style.color = "red";
-                return;
-            }
-        }
+        themeToggle.textContent = isDark ? "☀" : "☾";
 
-        // Ajouter les données
-        data.push(newItem);
+        localStorage.setItem(
+            "eduTheme",
+            isDark ? "dark" : "light"
+        );
+    });
+}
 
-        // Sauvegarder
-        saveData(type, data);
+// ===============================
+// MOBILE MENU
+// ===============================
 
-        // Afficher le résultat
-        displayData(type);
+const menuToggle = document.getElementById("menuToggle");
+const sidebar = document.getElementById("sidebar");
 
-        message.textContent = "Ajout effectué avec succès !";
-        message.style.color = "green";
-
-        // Vider le formulaire
-        form.reset();
+if (menuToggle && sidebar) {
+    menuToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("show");
     });
 
-    // Effacer le message lors de l'annulation
-    form.addEventListener("reset", function() {
-        if (message) {
-            message.textContent = "";
+    document.addEventListener("click", (event) => {
+        if (
+            window.innerWidth <= 700 &&
+            !sidebar.contains(event.target) &&
+            !menuToggle.contains(event.target)
+        ) {
+            sidebar.classList.remove("show");
         }
     });
+}
 
-    // Afficher les anciennes données
-    displayData(type);
-});
+// ===============================
+// STATISTICS
+// ===============================
+
+function updateStatistics() {
+
+    const moniteurs = JSON.parse(
+        localStorage.getItem("moniteurs") || "[]"
+    );
+
+    const apprenants = JSON.parse(
+        localStorage.getItem("apprenants") || "[]"
+    );
+
+    const seances = JSON.parse(
+        localStorage.getItem("seances") || "[]"
+    );
+
+    const moniteurCount = document.getElementById("moniteurCount");
+    const apprenantCount = document.getElementById("apprenantCount");
+    const seanceCount = document.getElementById("seanceCount");
+
+    if (moniteurCount) {
+        moniteurCount.textContent = moniteurs.length;
+    }
+
+    if (apprenantCount) {
+        apprenantCount.textContent = apprenants.length;
+    }
+
+    if (seanceCount) {
+        seanceCount.textContent = seances.length;
+    }
+}
+
+updateStatistics();
+
+console.log("EduSpace est prêt !");

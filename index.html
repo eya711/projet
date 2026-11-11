@@ -4,62 +4,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ensemble, vivons la route</title>
+    <title>EduSpace | Gestion Étudiante</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body class="home">
 
-    <!-- Zone 1 : En-tête -->
-    <header class="header">
-        <h1>Ensemble, vivons la route</h1>
+<body>
 
-        <div class="traffic-light">
-            <div class="light red"></div>
-            <div class="light orange"></div>
-            <div class="light green"></div>
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="brand">
+            <div class="brand-icon">E</div>
+            <span>EduSpace<span class="brand-dot">.</span></span>
         </div>
-    </header>
 
-    <!-- Zone 2 : Menu -->
-    <nav class="navigation">
-        <h2>Menu de navigation</h2>
+        <div class="menu-label">MENU PRINCIPAL</div>
 
-        <ul>
-            <li><a href="pages/moniteur.html" target="content">Moniteur</a></li>
-            <li><a href="pages/apprenant.html" target="content">Apprenant</a></li>
-            <li><a href="pages/seances.html" target="content">Séances</a></li>
-        </ul>
-    </nav>
+        <nav class="navigation">
+            <a href="index.html" class="nav-link active">
+                <span>▦</span> Dashboard
+            </a>
 
-    <!-- Zone 3 : Affichage -->
-    <main class="content">
-        <iframe name="content"
-                src="pages/seances.html"
-                title="Pages du projet">
-        </iframe>
+            <a href="pages/moniteur.html" class="nav-link">
+                <span>♙</span> Moniteurs
+            </a>
+
+            <a href="pages/apprenant.html" class="nav-link">
+                <span>♧</span> Apprenants
+            </a>
+
+            <a href="pages/seances.html" class="nav-link">
+                <span>▣</span> Séances
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="help-card">
+                <div class="help-icon">✦</div>
+                <h3>Besoin d'aide ?</h3>
+                <p>Gérez votre espace étudiant facilement.</p>
+            </div>
+            <div class="profile">
+                <div class="avatar">E</div>
+                <div>
+                    <strong>Administrateur</strong>
+                    <small>Espace étudiant</small>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <header class="topbar">
+            <button class="menu-toggle" id="menuToggle">☰</button>
+
+            <div>
+                <span class="breadcrumb">Pages /</span>
+                <strong>Dashboard</strong>
+            </div>
+
+            <div class="top-actions">
+                <span class="today" id="today"></span>
+                <button class="theme-button" id="themeToggle" title="Changer le thème">☾</button>
+                <div class="avatar">E</div>
+            </div>
+        </header>
+
+        <section class="content">
+
+            <div class="welcome">
+                <div>
+                    <span class="welcome-tag">ESPACE ADMINISTRATION</span>
+                    <h1>Bonjour, bienvenue ! 👋</h1>
+                    <p>Voici un aperçu de votre espace étudiant.</p>
+                </div>
+                <div class="welcome-decoration">✦</div>
+            </div>
+
+            <!-- STATISTICS -->
+            <div class="section-heading">
+                <div>
+                    <h2>Vue générale</h2>
+                    <p>Les statistiques de votre établissement</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+
+                <div class="stat-card purple">
+                    <div class="stat-top">
+                        <span>Moniteurs</span>
+                        <div class="stat-icon">♙</div>
+                    </div>
+                    <h2 id="moniteurCount">0</h2>
+                    <p>Gestion des moniteurs</p>
+                </div>
+
+                <div class="stat-card blue">
+                    <div class="stat-top">
+                        <span>Apprenants</span>
+                        <div class="stat-icon">♧</div>
+                    </div>
+                    <h2 id="apprenantCount">0</h2>
+                    <p>Gestion des apprenants</p>
+                </div>
+
+                <div class="stat-card orange">
+                    <div class="stat-top">
+                        <span>Séances</span>
+                        <div class="stat-icon">▣</div>
+                    </div>
+                    <h2 id="seanceCount">0</h2>
+                    <p>Gestion des séances</p>
+                </div>
+
+                <div class="stat-card green">
+                    <div class="stat-top">
+                        <span>Statut</span>
+                        <div class="stat-icon">✓</div>
+                    </div>
+                    <h2 class="status-text">Actif</h2>
+                    <p>Votre espace est opérationnel</p>
+                </div>
+
+            </div>
+
+            <!-- QUICK ACTIONS -->
+            <div class="section-heading">
+                <div>
+                    <h2>Accès rapide</h2>
+                    <p>Choisissez une opération</p>
+                </div>
+            </div>
+
+            <div class="actions-grid">
+
+                <a href="pages/moniteur.html" class="action-card">
+                    <div class="action-icon purple-bg">♙</div>
+                    <div>
+                        <h3>Ajouter un moniteur</h3>
+                        <p>Enregistrer un nouveau moniteur</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </a>
+
+                <a href="pages/apprenant.html" class="action-card">
+                    <div class="action-icon blue-bg">♧</div>
+                    <div>
+                        <h3>Ajouter un apprenant</h3>
+                        <p>Enregistrer un nouvel apprenant</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </a>
+
+                <a href="pages/seances.html" class="action-card">
+                    <div class="action-icon orange-bg">▣</div>
+                    <div>
+                        <h3>Nouvelle séance</h3>
+                        <p>Planifier une nouvelle séance</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </a>
+
+            </div>
+
+            <!-- INFORMATION -->
+            <div class="section-heading">
+                <div>
+                    <h2>Votre espace de travail</h2>
+                    <p>Tout est organisé au même endroit</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-symbol">✦</div>
+                <div>
+                    <h3>Bienvenue sur EduSpace</h3>
+                    <p>
+                        EduSpace est une plateforme de gestion qui vous permet
+                        d'organiser les moniteurs, les apprenants et les séances
+                        dans un espace simple et moderne.
+                    </p>
+                </div>
+            </div>
+
+            <footer>
+                © <span id="year"></span> EduSpace. Tous droits réservés.
+            </footer>
+
+        </section>
     </main>
+</div>
 
-    <!-- Zone 4 : Pied de page -->
-    <footer class="footer">
-        <details>
-            <summary>Contact</summary>
-
-            <table>
-                <tr>
-                    <th colspan="2">Téléphone</th>
-                </tr>
-                <tr>
-                    <td>Fixe</td>
-                    <td>Mobile</td>
-                </tr>
-                <tr>
-                    <td>72 200 200</td>
-                    <td>20 200 200</td>
-                </tr>
-            </table>
-        </details>
-    </footer>
-
-    <script src="assets/js/app.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>
